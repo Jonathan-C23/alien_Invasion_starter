@@ -19,3 +19,9 @@ class Settings:
         self.bullet_w = 25
         self.bullet_h = 80
         self.bullet_amount = 5
+
+        self.alien_file = Path.cwd() / 'Assets' / 'images' / 'xwing.png'
+        self.alien_w = 60
+        self.alien_h = 60
+        self.alien_flight_speed = 5
+        
