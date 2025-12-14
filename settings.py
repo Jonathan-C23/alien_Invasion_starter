@@ -16,7 +16,7 @@ class Settings:
 
         self.bullet_file = Path.cwd() / 'Assets' / 'images' / 'greenLaserBlast.png'
         self.laser_sound = Path.cwd() / 'Assets' / 'sound' / 'laser2.mp3'
-        self.impact_sound = Path.cwd() / 'Assets' / 'sound' / 'impactSound.mp3'
+        self.impact_sound = Path.cwd() / 'Assets' / 'sound' / 'impactSound2.mp3'
         self.bullet_speed = 7
         self.bullet_w = 25
         self.bullet_h = 80
