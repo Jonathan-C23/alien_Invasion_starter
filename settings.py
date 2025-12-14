@@ -23,7 +23,7 @@ class Settings:
         self.alien_file = Path.cwd() / 'Assets' / 'images' / 'xwing.png'
         self.alien_w = 60
         self.alien_h = 60
-        self.fleet_speed = 5
+        self.fleet_speed = 2
         self.fleet_direction = 1
         self.fleet_drop_speed = 50
 
