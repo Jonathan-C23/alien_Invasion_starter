@@ -30,7 +30,16 @@ class AlienFleet:
         x_offset = int((screen_w-fleet_horizontal_space)//2)
         y_offset = int((half_screen-fleet_verticle_space)//2)
 
-        self._create_rectangle_fleet(alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset)
+        self._create_x_fleet(alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset)
+
+    def _create_x_fleet(self, alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset):
+        for row in range(fleet_h):
+            for col in range(fleet_w):
+                # Place alien on main diagonal or anti-diagonal
+                if col == row or col == (fleet_w - 1 - row):
+                    current_x = col * alien_w + x_offset
+                    current_y = row * alien_h + y_offset
+                    self._create_alien(current_x, current_y)
 
     def _create_rectangle_fleet(self, alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset):
         for row in range(fleet_h):
@@ -40,26 +49,38 @@ class AlienFleet:
                 if col % 2 == 0 or row % 2 == 0:
                     continue
                 self._create_alien(current_x, current_y)
-    
-    def calculate_fleet_size(sef, alien_w, screen_w, alien_h, screen_h):
-        fleet_w = (screen_w//alien_w)
-        fleet_h = ((screen_h/2)//alien_h)
 
-        if fleet_w % 2 == 0:
-            fleet_w -= 1
-        else:
-            fleet_w -= 2
+    def calculate_fleet_size(self, alien_w, screen_w, alien_h, screen_h):
+        # Target fraction of the screen to occupy (adjust if you want exactly 2/3 or less/more)
+        fraction = 0.5  # Slightly under 2/3 to safely avoid touching edges on most resolutions
 
-        if fleet_h % 2 ==0:
-            fleet_h -= 1
-        else:
-            fleet_h -=2
+        
+        max_fleet_w = screen_w // alien_w
+        max_fleet_h = screen_h // alien_h
 
-        return int(fleet_w), int(fleet_h)
-    
-    def _create_alien(self, current_x: int, current_y:int):
+        target_w = int(max_fleet_w * fraction)
+        target_h = int(max_fleet_h * fraction)
+
+        # Odd for symmetry
+        if target_w % 2 == 0:
+            target_w -= 1
+        if target_h % 2 == 0:
+            target_h -= 1
+
+        fleet_w = target_w
+        fleet_h = target_h
+
+        
+        size = min(fleet_w, fleet_h)
+        if size % 2 == 0:
+            size -= 1
+        size = max(7, size)
+        fleet_w = fleet_h = size
+
+        return fleet_w, fleet_h
+
+    def _create_alien(self, current_x: int, current_y: int):
         new_alien = Alien(self, current_x, current_y)
-
         self.fleet.add(new_alien)
 
     def _check_fleet_edges(self):

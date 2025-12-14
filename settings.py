@@ -3,7 +3,7 @@ from pathlib import Path
 class Settings:
     def __init__(self):
         self.name: str = 'Alien Invasion'
-        self.screen_w = 1200
+        self.screen_w = 1000
         self.screen_h = 800
         self.FPS = 60
         self.bg_file = Path.cwd() / 'Assets' / 'images' / 'StarBackground.png'
@@ -23,9 +23,9 @@ class Settings:
         self.bullet_amount = 5
 
         self.alien_file = Path.cwd() / 'Assets' / 'images' / 'xwing.png'
-        self.alien_w = 60
-        self.alien_h = 60
-        self.fleet_speed = 2
+        self.alien_w = 50
+        self.alien_h = 50
+        self.fleet_speed = 4
         self.fleet_direction = 1
         self.fleet_drop_speed = 50
 
