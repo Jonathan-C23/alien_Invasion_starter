@@ -1,3 +1,10 @@
+"""
+Star Wars Alien Invasion
+Jonathan Carpenter
+This is a Alien Invasion game with a star wars theme
+12/14/2025
+"""
+
 import sys
 import pygame
 from settings import Settings
