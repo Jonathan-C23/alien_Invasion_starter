@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from alien_invasion import AlienInvasion
 
-class GameStatus():
+class GameStats():
     def __init__(self, game: 'AlienInvasion'):
         self.game = game
         self.settings = game.settings
@@ -16,7 +16,7 @@ class GameStatus():
 
     def init_saved_scores(self):
         self.path = self.settings.scores_file
-        if self.path.exists() and self.path.stat.__sizeof__() > 80:
+        if self.path.exists() and self.path.stat.__sizeof__() > 40:
             contents = self.path.read_text()
             scores = json.loads(contents)
             self.hi_score = scores.get('hi_score', 0)
