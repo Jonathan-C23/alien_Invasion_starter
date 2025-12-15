@@ -40,6 +40,9 @@ class AlienInvasion:
         self.laser_sound.set_volume(0.7)
         self.impact_sound = pygame.mixer.Sound(self.settings.impact_sound)
         self.impact_sound.set_volume(0.2)
+        self.music = pygame.mixer.Sound(self.settings.music)
+        self.music.set_volume(0.4)
+        self.music.play(-1)
 
         self.ship = Ship(self, Arsenal(self))
         self.alien_fleet = AlienFleet(self)
@@ -100,6 +103,9 @@ class AlienInvasion:
         self.ship._center_ship()
         self.game_active = True
         pygame.mouse.set_visible(False)
+
+        self.music.stop()
+        self.music.play(-1)
 
     def _update_screen(self):
         self.screen.blit(self.bg, (0,0))

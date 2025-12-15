@@ -30,11 +30,13 @@ class Settings:
         self.text_color = (255, 255, 255)
         self.button_font_size = 48
         self.HUD_font_size = 20
-        self.font_file = Path.cwd() / 'Assets' / 'Fonts' / 'Silkscreen' / 'Silkscreen-Bold.ttf'
+        self.font_file = Path.cwd() / 'Assets' / 'Fonts' / 'Starjedi' / 'Starjedi.ttf'
 
         self.life_image = Path.cwd() / 'Assets' / 'images' / 'life.png'
         self.life_w = 40
         self.life_h = 40
+
+        self.music = Path.cwd() / 'Assets' / 'sound' / 'music.mp3'
 
     def initialize_dynamic_settings(self):
         self.ship_speed = 5
@@ -45,7 +47,7 @@ class Settings:
         self.bullet_h = 80
         self.bullet_amount = 5
 
-        self.fleet_speed = 40
+        self.fleet_speed = 4
         self.fleet_drop_speed = 50
         self.alien_points = 50
 

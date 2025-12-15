@@ -46,7 +46,7 @@ class HUD:
         self.max_score_rect.top = self.padding
 
     def _update_hi_score(self):
-        hi_score_str = f'Hi-Score: {self.game_stats.hi_score: ,.0f}'
+        hi_score_str = f'# High Score: {self.game_stats.hi_score: ,.0f} #'
         self.hi_score_image = self.font.render(hi_score_str, True, self.settings.text_color, None)
         self.hi_score_rect = self.hi_score_image.get_rect()
         self.hi_score_rect.right = self.boundaries.right - self.padding
