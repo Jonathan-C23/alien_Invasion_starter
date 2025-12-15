@@ -21,6 +21,7 @@ class AlienInvasion:
     def __init__(self):
         pygame.init()
         self.settings = Settings()
+        self.settings.initialize_dynamic_settings()
         self.game_status = GameStatus(self.settings.starting_ship_count)
 
         self.screen = pygame.display.set_mode(
@@ -69,6 +70,7 @@ class AlienInvasion:
         
         if self.alien_fleet.check_destroyed_status():
             self._reset_level()
+            self.settings.increase_difficulty()
     
     def _check_game_status(self):
         if self.game_status.ships_left > 0:
@@ -86,6 +88,7 @@ class AlienInvasion:
         self.alien_fleet.create_fleet()
 
     def _restart_game(self):
+        self.settings.initialize_dynamic_settings()
         self._reset_level()
         self.ship._center_ship()
         self.game_active = True
@@ -95,6 +98,7 @@ class AlienInvasion:
         self.screen.blit(self.bg, (0,0))
         self.ship.draw()
         self.alien_fleet.draw()
+        
 
         if not self.game_active:
             self.play_button.draw()
