@@ -22,10 +22,10 @@ class AlienInvasion:
         pygame.init()
         self.settings = Settings()
         self.settings.initialize_dynamic_settings()
-        self.game_status = GameStatus(self.settings.starting_ship_count)
+        self.game_status = GameStatus(self)
 
         self.screen = pygame.display.set_mode(
-            (self.settings.screen_w,self.settings.screen_h)
+            (self.settings.screen_w,self.settings.screen_h) 
             )
         pygame.display.set_caption(self.settings.name)
 
@@ -56,21 +56,23 @@ class AlienInvasion:
             if self.game_active:
                 self.ship.update()
                 self.alien_fleet.update_fleet()
-                self._check_colissions()
+                self._check_collisions()
             self._update_screen()
             self.clock.tick(self.settings.FPS)
     
-    def _check_colissions(self):
+    def _check_collisions(self):
         if self.ship.check_collisions(self.alien_fleet.fleet):
             self._check_game_status()
-        colissions = self.alien_fleet.check_collisions(self.ship.arsenal.arsenal)
-        if colissions:
+        collisions = self.alien_fleet.check_collisions(self.ship.arsenal.arsenal)
+        if collisions:
             self.impact_sound.play()
             self.impact_sound.fadeout(800)
+            self.game_status.update(collisions)
         
         if self.alien_fleet.check_destroyed_status():
             self._reset_level()
             self.settings.increase_difficulty()
+            self.game_status.update_level()
     
     def _check_game_status(self):
         if self.game_status.ships_left > 0:
@@ -98,7 +100,7 @@ class AlienInvasion:
         self.screen.blit(self.bg, (0,0))
         self.ship.draw()
         self.alien_fleet.draw()
-        
+
 
         if not self.game_active:
             self.play_button.draw()
